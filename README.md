@@ -25,9 +25,9 @@ The included docker-compose.yml file demonstrates how to use the image. Addition
 
 2. Shared Folder Setup
 
-* Create a shared directory in the same location as your ```docker-compose.yml```.
+   * Create a *shared* directory in the same location as your ```docker-compose.yml```.
 
-* This directory must contain the following subdirectories (you can also clone them from this repo):
+   * This directory must contain the following subdirectories (you can also clone them from this repo):
 
 ```
 shared/
@@ -36,6 +36,7 @@ shared/
 ├── restore/
 └── shell_script/
 ```
+
 Description of each folder:
 
 * ```backup/```: On every container restart, a database dump will be saved here.
@@ -48,4 +49,4 @@ Description of each folder:
 
 ## Switching Branches
 
-To change the deployed Chemotion branch, modify the ELN_BRANCH variable in the **set_branch.sh** script inside the **shell_script/** folder.
+To change the deployed Chemotion branch, modify the **ELN_BRANCH** variable in the **set_branch.sh** script inside the **shell_script/** folder.
