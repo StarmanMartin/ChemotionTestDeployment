@@ -19,9 +19,9 @@ The included docker-compose.yml file demonstrates how to use the image. Addition
 
 1. Environment Variables
 
-* Copy the .env.sample file from this Repo to .env.
+   * Copy the .env.sample file from this Repo to .env.
 
-* Make sure to review and update all environment variables, especially PUBLIC_URL.
+   * Make sure to review and update all environment variables, especially PUBLIC_URL.
 
 2. Shared Folder Setup
 
