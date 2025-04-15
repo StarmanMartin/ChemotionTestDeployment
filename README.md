@@ -1,24 +1,51 @@
 # ChemotionTestDeployment
-Docker container factory for test deployments
 
+Docker container factory for test deployments of Chemotion
 
-## How to use it
+**⚠️ Disclaimer
+This setup is for testing purposes only and should not be used in production.
+Please shut down the container after you're done!**
 
-**This is only for testing and should not be used in production. PLEASE down the container after you are done!**
+## 🚀 What is this?
 
-This reop hosts a dockerfile that can be used to create a docker image to dynamically host Chemotion quickly and easily. 
+This repository provides a Dockerfile to build a Docker image that allows you to quickly and easily deploy Chemotion ELN in a test environment.
 
-You can find it in the Docker hub under mstarman/chemotion-eln-test:0.0.1.
+The prebuilt image is available on Docker Hub:
+```mstarman/chemotion-eln-test:0.0.1```
 
-The docker compose file in this repo shows how it can be used. Other elements such as ChemSpectra or ChemConverter can also be easily added to the compose file. 
+The included docker-compose.yml file demonstrates how to use the image. Additional services like ChemSpectra or ChemConverter can easily be added to the compose file as needed.
 
-This Repo contains a .env.sample file. Please copy it as .env in the directory of your compose file. Make sure that all environment variables are correct. MAke sure you have checked the PUBLIC_URL variable.
+## 🛠️ Getting Started
 
-You should add a shared folder into the same directory. This directory should contain 4 subdirectory. We recoment to clone the directory from this Repo:
+Environment Variables
 
-- backup: Every time the container in restarted it will make a DB dump into this folder
-- pullin: It overwrites files in the app (on every restart of the container). You can use it to overwrite the config files
-- restore: you can put .spl files in there. The latest file in this folder will be used to populate the DB. (After restoring the DB will be migrated)
-- shell_script: All .sh scripts in this folder will be executed on restart. This can be used to install (apt install ...) packages or reset environment variables as in the "set_branch.sh" script.  
+1. Copy the .env.sample file to .env: 
 
-To change the branch simply change the exported ELN_BRANCH in the set_branch.sh scripts!
+Make sure to review and update all environment variables, especially PUBLIC_URL.
+
+2. Shared Folder Setup
+
+Create a shared directory in the same location as your docker-compose.yml.
+
+This directory must contain the following subdirectories (you can also clone them from this repo):
+
+```
+shared/
+├── backup/
+├── pullin/
+├── restore/
+└── shell_script/
+```
+Description of each folder:
+
+* backup/: On every container restart, a database dump will be saved here.
+
+* pullin/: Files in this folder will **overwrite** files in the application on each container restart (useful for overriding config files).
+
+* restore/: Place .spl database dump files here. The **latest** file will be used to initialize the DB (with automatic migration afterwards).
+
+* shell_script/: Any .sh scripts in this folder will be executed on container restart. This is useful for tasks such as installing packages (apt install ...) or updating environment variables.
+
+## Switching Branches
+
+To change the deployed Chemotion branch, modify the ELN_BRANCH variable in the **set_branch.sh** script inside the **shell_script/** folder.
