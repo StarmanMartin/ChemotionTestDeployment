@@ -17,17 +17,17 @@ The included docker-compose.yml file demonstrates how to use the image. Addition
 
 ## 🛠️ Getting Started
 
-Environment Variables
+1. Environment Variables
 
-1. Copy the .env.sample file to .env: 
+* Copy the .env.sample file from this Repo to .env.
 
-Make sure to review and update all environment variables, especially PUBLIC_URL.
+* Make sure to review and update all environment variables, especially PUBLIC_URL.
 
 2. Shared Folder Setup
 
-Create a shared directory in the same location as your docker-compose.yml.
+* Create a shared directory in the same location as your ```docker-compose.yml```.
 
-This directory must contain the following subdirectories (you can also clone them from this repo):
+* This directory must contain the following subdirectories (you can also clone them from this repo):
 
 ```
 shared/
@@ -38,13 +38,13 @@ shared/
 ```
 Description of each folder:
 
-* backup/: On every container restart, a database dump will be saved here.
+* ```backup/```: On every container restart, a database dump will be saved here.
 
-* pullin/: Files in this folder will **overwrite** files in the application on each container restart (useful for overriding config files).
+* ```pullin/```: Files in this folder will **overwrite** files in the application on each container restart (useful for overriding config files).
 
-* restore/: Place .spl database dump files here. The **latest** file will be used to initialize the DB (with automatic migration afterwards).
+* ```restore/```: Place .spl database dump files here. The **latest** file will be used to initialize the DB (with automatic migration afterwards).
 
-* shell_script/: Any .sh scripts in this folder will be executed on container restart. This is useful for tasks such as installing packages (apt install ...) or updating environment variables.
+* ```shell_script/```: Any .sh scripts in this folder will be executed on container restart. This is useful for tasks such as installing packages (apt install ...) or updating environment variables.
 
 ## Switching Branches
 
