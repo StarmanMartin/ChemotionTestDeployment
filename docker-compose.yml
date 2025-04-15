@@ -1,0 +1,44 @@
+# This docker-compose file sets up the dev environment.
+# It builds an app container based on Dockerfile.chemotion.dev
+#
+# USAGE:
+# - Run development environment:
+#     docker-compose -f docker-compose.dev.yml up postgres app webpacker
+# - Open a bash shell in the app container:
+#     docker exec -it NAME_OF_APP_CONTAINER_FROM_DOCKER_PS /bin/bash
+# - Run tests:
+#     bundle exec rspec
+#
+# - see .dockerenv.example for environment variables usage
+
+services:
+  db:
+    image: ${DOCKER_PG_IMAGE:-postgres:16}
+    environment:
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
+    expose: # expose port to app container
+      - '5432'
+    ports: # expose port to host machine in case we want to use external db gui tools
+      - '54322:5432'
+    volumes:
+      - chemotion_db:/var/lib/postgresql/data/
+
+  app:
+    image:  mstarman/chemotion-eln-test:0.0.1
+    build:
+      context: '.'
+    depends_on:
+      - 'db'
+    env_file:
+      - ./.env
+    ports: # expose default rails port to host machine
+      - "4000:4000"
+    volumes:
+      - ./shared/pullin:/shared
+      - ./shared/backup:/backup
+      - ./shared/restore:/restore
+      - ./shared/shell_scripts:/shell_scripts
+
+volumes:
+  chemotion_db:
+    name: ${VOLUME_NAME_DB:-chemotion_db}
