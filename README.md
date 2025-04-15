@@ -4,6 +4,8 @@ Docker container factory for test deployments
 
 ## How to use it
 
+**This is only for testing and should not be used in production. PLEASE down the container after you are done!**
+
 This reop hosts a dockerfile that can be used to create a docker image to dynamically host Chemotion quickly and easily. 
 
 You can find it in the Docker hub under mstarman/chemotion-eln-test:0.0.1.
