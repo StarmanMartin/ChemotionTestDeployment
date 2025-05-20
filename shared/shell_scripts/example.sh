@@ -9,5 +9,3 @@ echo "
 ##       ##     ##  ##       ##     ## ##     ##    ##      ##   ##     ## ##   ###    ###
  ######  ##     ##  ######## ##     ##  #######     ##     ####   #######  ##    ##    ###
 "
-
-export ELN_BRANCH=2425-genericly-extendable-variations

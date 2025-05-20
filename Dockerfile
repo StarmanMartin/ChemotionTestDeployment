@@ -45,13 +45,14 @@ COPY ./etc_doc/db_restore.rake ./db_restore.rake
 
 SHELL ["/bin/bash", "-c"]
 
-ENV PIDFILE=/chemotion/pid
+ENV PIDFILE=/chemotion/pid_run
+ENV RAILS_PIDFILE=/chemotion/pid
 
 # Even if asdf and the related tools are only installed by running run-ruby-dev.sh, we set the PATH variables here, so when we enter the container via docker exec, we have the path set correctly
 ENV ASDF_DIR=/root/.asdf
 ENV PATH=/root/.asdf/shims:/root/.asdf/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-COPY ./etc_doc/entrypoint.sh ./entrypoint.sh
-RUN chmod +x ./entrypoint.sh
+COPY ./etc_doc/*.sh ./
+RUN chmod +x ./*.sh
 
 
 CMD bash ./entrypoint.sh

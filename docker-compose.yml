@@ -11,18 +11,20 @@ services:
       - chemotion_db:/var/lib/postgresql/data/
 
   app:
-    image:  mstarman/chemotion-eln-test:0.0.1
+    image:  mstarman/chemotion-eln-test:0.0.2
+    build: .
     depends_on:
       - 'db'
     env_file:
       - ./.env
     ports: # expose default rails port to host machine
-      - "4000:4000"
+      - "${PROJECT_WEB_PORT:-4000}:4000"
     volumes:
       - ./shared/pullin:/shared
       - ./shared/backup:/backup
       - ./shared/restore:/restore
       - ./shared/shell_scripts:/shell_scripts
+      - ./shared/BRANCH.txt:/chemotion/BRANCH.txt
 
 volumes:
   chemotion_db:
