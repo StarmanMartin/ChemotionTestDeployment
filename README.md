@@ -9,13 +9,30 @@ Please shut down the container after you're done!**
 ## 🚀 What is this?
 
 This repository provides a Dockerfile to build a Docker image that allows you to quickly and easily deploy Chemotion ELN in a test environment.
+The content is automatically updated after each new commit on the selected branches.
+
+-> __No webhooks are needed!__ It is easy to set up and you do not require any privileges.
 
 The prebuilt image is available on Docker Hub:
-```mstarman/chemotion-eln-test:0.0.1```
+```mstarman/chemotion-eln-test:0.0.3```
 
 The included docker-compose.yml file demonstrates how to use the image. Additional services like ChemSpectra or ChemConverter can easily be added to the compose file as needed.
 
 ## 🛠️ Getting Started
+
+We provide an installation script that has only been tested on Ubuntu. However, you can also set it up manually in just a few steps
+
+### Ubuntu install script
+
+Run:
+
+```shell
+curl -H 'Cache-Control: no-cache' -O https://raw.githubusercontent.com/StarmanMartin/ChemotionTestDeployment/main/setup.sh
+chmod +x setup.sh
+./setup.sh
+```
+
+### By Hand
 
 1. Environment Variables
 
@@ -34,7 +51,8 @@ shared/
 ├── backup/
 ├── pullin/
 ├── restore/
-└── shell_script/
+├── shell_script/
+└── BRANCH.txt
 ```
 
 Description of each folder:
@@ -46,7 +64,9 @@ Description of each folder:
 * ```restore/```: Place .spl database dump files here. The **latest** file will be used to initialize the DB (with automatic migration afterwards).
 
 * ```shell_script/```: Any .sh scripts in this folder will be executed on container restart. This is useful for tasks such as installing packages (apt install ...) or updating environment variables.
+* 
+* ```BRANCH.txt```: The GIT repo branch. This branch is monitored and if there is a new commit, the server is automatically updated.
 
 ## Switching Branches
 
-To change the deployed Chemotion branch, modify the **ELN_BRANCH** variable in the **set_branch.sh** script inside the **shell_script/** folder.
+To change the deployed Chemotion branch, modify the first line in the **BRANCH.txt**.

@@ -51,6 +51,7 @@ echo "|  Installing dependencies "
 echo "|================================================================================|"
 
 ./prepare-asdf.sh
+asdf reshim
 ./prepare-nodejs.sh
 ./prepare-rubygems.sh
 ./prepare-nodejspkg.sh
@@ -58,7 +59,7 @@ echo "|=========================================================================
 export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 export RAILS_ENV=production
 
-asdf reshim ruby
+
 EDITOR="mate --wait" RAILS_ENV=production bundle exec rails credentials:edit
 
 echo "|================================================================================|"
@@ -89,7 +90,7 @@ echo "|=========================================================================
 # tail -f /dev/null
 if [ -f $RAILS_PIDFILE ]; then
   kill -TERM $(cat $RAILS_PIDFILE)
-  rm -f $$RAILS_PIDFILE
+  rm -f $RAILS_PIDFILE
 fi
 
 RAILS_FORCE_SSL=false bundle exec rails s -b 0.0.0.0 -p4000 --pid "${RAILS_PIDFILE}"

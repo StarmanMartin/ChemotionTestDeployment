@@ -11,7 +11,7 @@ services:
       - chemotion_db:/var/lib/postgresql/data/
 
   app:
-    image:  mstarman/chemotion-eln-test:0.0.2
+    image:  mstarman/chemotion-eln-test:0.0.3
     build: .
     depends_on:
       - 'db'
