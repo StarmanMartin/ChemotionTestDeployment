@@ -37,6 +37,7 @@ echo "Downloading missing files!"
 curl -O https://raw.githubusercontent.com/StarmanMartin/ChemotionTestDeployment/main/docker-compose.yml
 cd shared/shell_scripts
 curl -O https://raw.githubusercontent.com/StarmanMartin/ChemotionTestDeployment/main/shared/shell_scripts/example.sh
+curl -O https://raw.githubusercontent.com/StarmanMartin/ChemotionTestDeployment/main/shared/shell_scripts/update_npm.sh
 cd ../pullin/config
 curl -O https://raw.githubusercontent.com/StarmanMartin/ChemotionTestDeployment/main/shared/pullin/config/database.yml
 cd ../../restore

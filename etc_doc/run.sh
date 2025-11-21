@@ -2,34 +2,14 @@
 
 echo $$ > $PIDFILE
 
-clone_repo () {
-  LOCALREPO_VC_DIR=$3/.git
-  if [ -d "$LOCALREPO_VC_DIR" ]
-  then
-    cd "$3"
-    cd ..
-    rm -r "$3"
-    mkdir "$3"
-  fi
-  git clone -b $2 "$1" "$3"
-}
-
-REPO=https://github.com/ComPlat/chemotion_ELN.git
 LOCALREPO=/chemotion/chem
 
-
-ELN_BRANCH=${ELN_BRANCH:-main}
-
-echo "|================================================================================|"
-echo "|  Cloning Chemotion Branch: ${ELN_BRANCH}  "
-echo "|================================================================================|"
-clone_repo $REPO ${ELN_BRANCH} $LOCALREPO
-
-CONF="$LOCALREPO"/config
 
 echo "|================================================================================|"
 echo "|  Setting up defaults  "
 echo "|================================================================================|"
+
+CONF="$LOCALREPO"/config
 
 cp -f "$CONF"/datacollectors.yml.example "$CONF"/datacollectors.yml
 cp -f "$CONF"/profile_default.yml.example "$CONF"/profile_default.yml
@@ -50,9 +30,10 @@ echo "|=========================================================================
 echo "|  Installing dependencies "
 echo "|================================================================================|"
 
-./prepare-asdf.sh
+
+asdf install
 asdf reshim
-./prepare-nodejs.sh
+npm install yarn -g
 ./prepare-rubygems.sh
 ./prepare-nodejspkg.sh
 

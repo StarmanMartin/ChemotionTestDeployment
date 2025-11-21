@@ -11,7 +11,6 @@ development:
   password:
   template: template0
   host: postgres
-                                                                                                                                 M
   port: 5432
 
 test:

@@ -13,6 +13,7 @@ for script in "$SCRIPT_DIR"/*.sh; do
     echo "Running $script..."
     chmod +x "$script"    # Make sure it's executable
     source "$script"
+    cd /chemotion
   fi
 done
 
