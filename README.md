@@ -52,6 +52,8 @@ shared/
 ├── pullin/
 ├── restore/
 ├── shell_script/
+├── client_dependencies.json
+├── server_dependencies.json
 └── BRANCH.txt
 ```
 
