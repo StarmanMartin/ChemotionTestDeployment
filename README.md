@@ -64,8 +64,26 @@ Description of each folder:
 * ```restore/```: Place .spl database dump files here. The **latest** file will be used to initialize the DB (with automatic migration afterwards).
 
 * ```shell_script/```: Any .sh scripts in this folder will be executed on container restart. This is useful for tasks such as installing packages (apt install ...) or updating environment variables.
-* 
+
 * ```BRANCH.txt```: The GIT repo branch. This branch is monitored and if there is a new commit, the server is automatically updated.
+
+* ```client_dependencies.json```: Overwrite Nodejs client dependencies.
+```json
+{
+   "@complat/chemotion-converter-client": "github:ComPlat/chemotion-converter-client#test_release_07072026"
+}
+```
+
+* ```server_dependencies.json```: Overwrite Ruby server dependencies.
+```json
+{
+  "labimotion": {
+    "git": "https://github.com/StarmanMartin/labimotion.git",
+    "branch": "make-units-for-system-defined-inputs-configurable-in-the-converter"
+  },
+  "puma": "< 6.0.0"
+}
+```
 
 ## Switching Branches
 

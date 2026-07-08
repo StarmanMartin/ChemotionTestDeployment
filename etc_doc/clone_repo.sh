@@ -31,6 +31,9 @@ cd $LOCALREPO
 asdf reshim
 asdf install
 npm install yarn -g
+../replace_client_dependencies.sh
+../replace_server_dependencies.sh
 ./prepare-nodejs.sh
+yarn install
 
 cd /chemotion

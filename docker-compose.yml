@@ -11,7 +11,7 @@ services:
       - chemotion_db:/var/lib/postgresql/data/
 
   app:
-    image:  mstarman/chemotion-eln-test:0.0.4
+    image:  mstarman/chemotion-eln-test:0.0.5
     depends_on:
       - 'db'
     env_file:
@@ -24,6 +24,8 @@ services:
       - ./shared/restore:/restore
       - ./shared/shell_scripts:/shell_scripts
       - ./shared/BRANCH.txt:/chemotion/BRANCH.txt
+      - ./shared/client_dependencies.json:/chemotion/client_dependencies.json
+      - ./shared/server_dependencies.json:/chemotion/server_dependencies.json
 
 volumes:
   chemotion_db:

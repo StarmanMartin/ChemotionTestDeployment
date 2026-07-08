@@ -3,7 +3,7 @@
 # WARNING: Building this container initially takes a lot of time, due to gem compiling, so grab a coffee
 # and write some documentation meanwhile ;)
 
-FROM --platform=linux/amd64 ubuntu:jammy
+FROM ubuntu:jammy
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -59,9 +59,23 @@ ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 # Even if asdf and the related tools are only installed by running run-ruby-dev.sh, we set the PATH variables here, so when we enter the container via docker exec, we have the path set correctly
 ENV ASDF_DIR=/root/.asdf
-ENV PATH=/root/.asdf/shims:/root/.asdf/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH="${ASDF_DIR}/bin:${ASDF_DIR}/shims:${PATH}"
+
+
+ARG ASDF_VERSION=v0.18.0
+
+RUN curl -fsSL https://github.com/asdf-vm/asdf/releases/download/${ASDF_VERSION}/asdf-${ASDF_VERSION}-linux-amd64.tar.gz \
+    -o /tmp/asdf.tar.gz \
+    && tar -xzf /tmp/asdf.tar.gz -C /tmp \
+    && mv /tmp/asdf /usr/local/bin/asdf \
+    && chmod +x /usr/local/bin/asdf
+
+RUN asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+RUN asdf install ruby 2.7.8
+
+
 COPY ./etc_doc/*.sh ./
 RUN chmod +x ./*.sh
-
 
 CMD bash ./entrypoint.sh
