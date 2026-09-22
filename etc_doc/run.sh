@@ -31,9 +31,7 @@ echo "|  Installing dependencies "
 echo "|================================================================================|"
 
 
-asdf install
-asdf reshim
-npm install yarn -g
+# asdf tools are installed in clone_repo.sh; prepare-nodejspkg.sh installs yarn and runs yarn install
 ./prepare-rubygems.sh || { echo "prepare-rubygems.sh failed"; exit 1; }
 # prepare-rubygems.sh may not propagate a killed bundle install, so verify the gems explicitly
 bundle check || { echo "Ruby gems missing (bundle install failed, possibly out of memory)"; exit 1; }

@@ -27,13 +27,10 @@ clone_repo $REPOR ${ELN_BRANCH} $LOCALREPO
 
 cd $LOCALREPO
 
+# prepare-asdf.sh also runs asdf install (Ruby/Node from .tool-versions)
 ./prepare-asdf.sh
-asdf reshim
-asdf install
-npm install yarn -g
 ../replace_client_dependencies.sh
 ../replace_server_dependencies.sh
 ./prepare-nodejs.sh
-yarn install
 
 cd /chemotion
