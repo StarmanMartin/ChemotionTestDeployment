@@ -34,8 +34,10 @@ echo "|=========================================================================
 asdf install
 asdf reshim
 npm install yarn -g
-./prepare-rubygems.sh
-./prepare-nodejspkg.sh
+./prepare-rubygems.sh || { echo "prepare-rubygems.sh failed"; exit 1; }
+# prepare-rubygems.sh may not propagate a killed bundle install, so verify the gems explicitly
+bundle check || { echo "Ruby gems missing (bundle install failed, possibly out of memory)"; exit 1; }
+./prepare-nodejspkg.sh || { echo "prepare-nodejspkg.sh failed"; exit 1; }
 
 export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 export RAILS_ENV=production
